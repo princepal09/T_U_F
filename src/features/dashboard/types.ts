@@ -5,3 +5,7 @@ import { LucideIcon } from "lucide-react";
     label: string;
     href: string;
   }
+  
+export interface LogoutButtonProps{
+  children?:React.ReactNode
+}  

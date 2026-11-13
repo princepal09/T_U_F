@@ -1,4 +1,4 @@
-import React from "react";
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,8 +9,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FaGoogle, FaGithub } from "react-icons/fa";
+import { signIn } from "next-auth/react";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 const SignInFormClient = () => {
+  async function handleGoogleSignIn() {
+    await signIn("google", { redirectTo: DEFAULT_LOGIN_REDIRECT });
+  }
+  async function handleGithubSignIn() {
+    await signIn("github", { redirectTo: DEFAULT_LOGIN_REDIRECT });
+  }
   return (
     <Card className="w-full  max-w-md ">
       <CardHeader className="space-y-1 ">
@@ -23,13 +31,13 @@ const SignInFormClient = () => {
         </CardDescription>
 
         <CardContent className="grid gap-4">
-          <form action={"#"}>
+          <form action={handleGoogleSignIn}>
             <Button type="submit" variant={"outline"} className={"w-full"}>
               <FaGoogle />
               <span>Sign in with google</span>
             </Button>
           </form>
-          <form action={"#"}>
+          <form action={handleGithubSignIn}>
             <Button type="submit" variant={"outline"} className={"w-full"}>
               <FaGithub />
               <span>Sign in with github</span>
